@@ -1,112 +1,145 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpkd6a1wqry30"]
+[gd_scene load_steps=9 format=3 uid="uid://cpkd6a1wqry30"]
 
 [ext_resource type="Material" uid="uid://c0r8neolj8lyy" path="res://materials/floor.tres" id="1_drrpw"]
 [ext_resource type="Material" uid="uid://blqqlr0q2kmk5" path="res://materials/wall.tres" id="2_l6xgu"]
 [ext_resource type="PackedScene" uid="uid://dmhdhso84qc7e" path="res://scenes/player.tscn" id="3_23tj0"]
+[ext_resource type="Script" path="res://scripts/auto_hider.gd" id="3_gv2fk"]
+[ext_resource type="PackedScene" uid="uid://mp2n02pgyouo" path="res://scenes/camera_rig.tscn" id="4_cjevv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0lmrh"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fjg1c"]
+sky_material = SubResource("ProceduralSkyMaterial_0lmrh")
+
+[sub_resource type="Environment" id="Environment_ye545"]
+background_mode = 2
+sky = SubResource("Sky_fjg1c")
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ye545")
 
 [node name="Scenario" type="Node3D" parent="."]
 
 [node name="Room1" type="Node3D" parent="Scenario"]
 
-[node name="Floor" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Floors" type="Node3D" parent="Scenario/Room1"]
+
+[node name="Floor" type="CSGBox3D" parent="Scenario/Room1/Floors"]
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(10, 1, 10)
 
-[node name="Floor2" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Floor2" type="CSGBox3D" parent="Scenario/Room1/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(30, 1, 20)
 
-[node name="Floor3" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Floor3" type="CSGBox3D" parent="Scenario/Room1/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, -15)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(15, 1, 20)
 
-[node name="Wall" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Walls" type="Node3D" parent="Scenario/Room1"]
+
+[node name="Wall" type="CSGBox3D" parent="Scenario/Room1/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75, 3, 4.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(2.5, 5, 1)
 
-[node name="Wall2" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Wall2" type="CSGBox3D" parent="Scenario/Room1/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75, 3, 4.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(2.5, 5, 1)
 
-[node name="Wall3" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Wall3" type="CSGBox3D" parent="Scenario/Room1/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3, 0)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 10)
 
-[node name="Wall4" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Wall4" type="CSGBox3D" parent="Scenario/Room1/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 0)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 10)
 
-[node name="Wall5" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Wall5" type="CSGBox3D" parent="Scenario/Room1/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3, -5.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(10, 5, 1)
 
-[node name="Wall6" type="CSGBox3D" parent="Scenario/Room1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, -5.5)
+[node name="Wall6" type="CSGBox3D" parent="Scenario/Room1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 3, -5.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
-size = Vector3(10, 5, 1)
+size = Vector3(11, 5, 1)
 
-[node name="Wall7" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Wall7" type="CSGBox3D" parent="Scenario/Room1/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 3, -15)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 20)
 
-[node name="Wall8" type="CSGBox3D" parent="Scenario/Room1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3, -20.75)
+[node name="Wall8" type="CSGBox3D" parent="Scenario/Room1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3, -20.25)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
-size = Vector3(1, 5, 8.5)
+size = Vector3(1, 5, 7.5)
+script = ExtResource("3_gv2fk")
 
-[node name="Wall9" type="CSGBox3D" parent="Scenario/Room1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3, -9.25)
+[node name="Wall9" type="CSGBox3D" parent="Scenario/Room1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3, -9.75)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
-size = Vector3(1, 5, 8.5)
+size = Vector3(1, 5, 7.5)
+script = ExtResource("3_gv2fk")
 
-[node name="Wall10" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Wall10" type="CSGBox3D" parent="Scenario/Room1/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 3, -24.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall11" type="CSGBox3D" parent="Scenario/Room1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 3, -24.5)
+[node name="Wall11" type="CSGBox3D" parent="Scenario/Room1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75, 3, -24.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall12" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Wall12" type="CSGBox3D" parent="Scenario/Room1/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 3, -24.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(15, 5, 1)
 
-[node name="Wall13" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Wall13" type="CSGBox3D" parent="Scenario/Room1/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 3, -5.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(15, 5, 1)
 
-[node name="Wall14" type="CSGBox3D" parent="Scenario/Room1"]
+[node name="Wall14" type="CSGBox3D" parent="Scenario/Room1/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 3, -15)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 18)
@@ -114,155 +147,174 @@ size = Vector3(1, 5, 18)
 [node name="Room2" type="Node3D" parent="Scenario"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 
-[node name="Floor" type="CSGBox3D" parent="Scenario/Room2"]
+[node name="Floors" type="Node3D" parent="Scenario/Room2"]
+
+[node name="Floor" type="CSGBox3D" parent="Scenario/Room2/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(5, 1, 10)
 
-[node name="Floor2" type="CSGBox3D" parent="Scenario/Room2"]
+[node name="Floor2" type="CSGBox3D" parent="Scenario/Room2/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(30, 1, 20)
 
-[node name="Wall17" type="CSGBox3D" parent="Scenario/Room2"]
+[node name="Walls" type="Node3D" parent="Scenario/Room2"]
+
+[node name="Wall17" type="CSGBox3D" parent="Scenario/Room2/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -20)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 10)
 
-[node name="Wall18" type="CSGBox3D" parent="Scenario/Room2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -20)
+[node name="Wall18" type="CSGBox3D" parent="Scenario/Room2/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -19.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
-size = Vector3(1, 5, 10)
+size = Vector3(1, 5, 11)
 
-[node name="Wall" type="CSGBox3D" parent="Scenario/Room2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3, -35)
+[node name="Wall" type="CSGBox3D" parent="Scenario/Room2/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3, -34.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
-size = Vector3(1, 5, 20)
+size = Vector3(1, 5, 19)
 
-[node name="Wall2" type="CSGBox3D" parent="Scenario/Room2"]
+[node name="Wall2" type="CSGBox3D" parent="Scenario/Room2/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 3, -35)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 20)
 
-[node name="Wall15" type="CSGBox3D" parent="Scenario/Room2"]
+[node name="Wall15" type="CSGBox3D" parent="Scenario/Room2/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 3, -25.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall16" type="CSGBox3D" parent="Scenario/Room2"]
+[node name="Wall16" type="CSGBox3D" parent="Scenario/Room2/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 3, -25.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall19" type="CSGBox3D" parent="Scenario/Room2"]
+[node name="Wall19" type="CSGBox3D" parent="Scenario/Room2/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 3, -44.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall20" type="CSGBox3D" parent="Scenario/Room2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 3, -44.5)
+[node name="Wall20" type="CSGBox3D" parent="Scenario/Room2/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25, 3, -44.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
-size = Vector3(12.5, 5, 1)
+size = Vector3(13.5, 5, 1)
 
 [node name="Room3" type="Node3D" parent="Scenario"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
-[node name="Floor" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Floors" type="Node3D" parent="Scenario/Room3"]
+
+[node name="Floor" type="CSGBox3D" parent="Scenario/Room3/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -55)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(30, 1, 20)
 
-[node name="Floor2" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Floor2" type="CSGBox3D" parent="Scenario/Room3/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, 0, -55)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(15, 1, 20)
 
-[node name="Floor5" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Floor5" type="CSGBox3D" parent="Scenario/Room3/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(5, 1, 10)
 
-[node name="Wall" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Walls" type="Node3D" parent="Scenario/Room3"]
+
+[node name="Wall" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3, -55)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 20)
 
-[node name="Wall2" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Wall2" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 3, -60.25)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 7.5)
 
-[node name="Wall3" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Wall3" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 3, -49.25)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 8.5)
 
-[node name="Wall4" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Wall4" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 3, -45.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(14, 5, 1)
 
-[node name="Wall5" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Wall5" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 3, -64.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(16, 5, 1)
 
-[node name="Wall6" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Wall6" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5, 3, -54.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 19)
 
-[node name="Wall15" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Wall15" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 3, -64.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall16" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Wall16" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 3, -64.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall17" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Wall17" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 3, -45.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall18" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Wall18" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 3, -45.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall21" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Wall21" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -40)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 10)
 
-[node name="Wall22" type="CSGBox3D" parent="Scenario/Room3"]
+[node name="Wall22" type="CSGBox3D" parent="Scenario/Room3/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -40)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 10)
@@ -270,167 +322,178 @@ size = Vector3(1, 5, 10)
 [node name="Room4" type="Node3D" parent="Scenario"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
 
-[node name="Floor" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Floors" type="Node3D" parent="Scenario/Room4"]
+
+[node name="Floor" type="CSGBox3D" parent="Scenario/Room4/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -75)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(30, 1, 20)
 
-[node name="Floor2" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Floor2" type="CSGBox3D" parent="Scenario/Room4/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, -75)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(15, 1, 20)
 
-[node name="Floor6" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Floor6" type="CSGBox3D" parent="Scenario/Room4/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -60)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(5, 1, 10)
 
-[node name="Wall7" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Walls" type="Node3D" parent="Scenario/Room4"]
+
+[node name="Wall7" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 3, -75)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 20)
 
-[node name="Wall8" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Wall8" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3, -80.75)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 8.5)
 
-[node name="Wall9" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Wall9" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3, -69.25)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 8.5)
 
-[node name="Wall10" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Wall10" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 3, -84.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall11" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Wall11" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 3, -84.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall12" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Wall12" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 3, -84.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(15, 5, 1)
 
-[node name="Wall13" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Wall13" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 3, -65.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(15, 5, 1)
 
-[node name="Wall14" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Wall14" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 3, -75)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 18)
 
-[node name="Wall17" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Wall17" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 3, -65.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall18" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Wall18" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 3, -65.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall23" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Wall23" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -60)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 10)
 
-[node name="Wall24" type="CSGBox3D" parent="Scenario/Room4"]
+[node name="Wall24" type="CSGBox3D" parent="Scenario/Room4/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -60)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 10)
 
 [node name="Room5" type="Node3D" parent="Scenario"]
 
-[node name="Floor3" type="CSGBox3D" parent="Scenario/Room5"]
+[node name="Floors" type="Node3D" parent="Scenario/Room5"]
+
+[node name="Floor3" type="CSGBox3D" parent="Scenario/Room5/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -120)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(5, 1, 10)
 
-[node name="Floor4" type="CSGBox3D" parent="Scenario/Room5"]
+[node name="Floor4" type="CSGBox3D" parent="Scenario/Room5/Floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -135)
 material_override = ExtResource("1_drrpw")
 use_collision = true
 size = Vector3(30, 1, 20)
 
-[node name="Wall21" type="CSGBox3D" parent="Scenario/Room5"]
+[node name="Walls" type="Node3D" parent="Scenario/Room5"]
+
+[node name="Wall21" type="CSGBox3D" parent="Scenario/Room5/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -120)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 10)
 
-[node name="Wall22" type="CSGBox3D" parent="Scenario/Room5"]
+[node name="Wall22" type="CSGBox3D" parent="Scenario/Room5/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -120)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 10)
 
-[node name="Wall3" type="CSGBox3D" parent="Scenario/Room5"]
+[node name="Wall3" type="CSGBox3D" parent="Scenario/Room5/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3, -135)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 20)
 
-[node name="Wall4" type="CSGBox3D" parent="Scenario/Room5"]
+[node name="Wall4" type="CSGBox3D" parent="Scenario/Room5/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 3, -135)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(1, 5, 20)
 
-[node name="Wall23" type="CSGBox3D" parent="Scenario/Room5"]
+[node name="Wall23" type="CSGBox3D" parent="Scenario/Room5/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 3, -125.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall24" type="CSGBox3D" parent="Scenario/Room5"]
+[node name="Wall24" type="CSGBox3D" parent="Scenario/Room5/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 3, -125.5)
+layers = 2
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall25" type="CSGBox3D" parent="Scenario/Room5"]
+[node name="Wall25" type="CSGBox3D" parent="Scenario/Room5/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 3, -144.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
-[node name="Wall26" type="CSGBox3D" parent="Scenario/Room5"]
+[node name="Wall26" type="CSGBox3D" parent="Scenario/Room5/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 3, -144.5)
 material_override = ExtResource("2_l6xgu")
 use_collision = true
 size = Vector3(12.5, 5, 1)
 
 [node name="Player" parent="." instance=ExtResource("3_23tj0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0.5, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.936029, 0.351923, 0, -0.351923, 0.936029, 0, 3.82323, 3.79895)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -15)
-omni_range = 10.0
+[node name="CameraRig" parent="." instance=ExtResource("4_cjevv")]

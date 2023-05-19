@@ -9,8 +9,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var animation_player = $Model/Player/AnimationPlayer
 @onready var model = $Model
+@onready var camera_point = $CameraPoint
+
+var walking = false
 
 func _ready():
+	GameManager.set_player(self)
 	animation_player.set_blend_time("idle", "run", 0.2)
 	animation_player.set_blend_time("run", "idle", 0.2)
 
@@ -33,11 +37,15 @@ func _physics_process(delta):
 		
 		model.look_at(position + direction)
 		
-		animation_player.play("run")
+		if !walking:
+			walking = true
+			animation_player.play("run")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
-		animation_player.play("idle")
+		if walking:
+			walking = false
+			animation_player.play("idle")
 
 	move_and_slide()
