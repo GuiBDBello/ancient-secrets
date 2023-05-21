@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://esr8q2p7ku6m"]
+
+[ext_resource type="PackedScene" uid="uid://b8nooca2tfw1q" path="res://assets/models/environment/floor/tileBrickB_large.gltf.glb" id="1_r3spw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_npmgw"]
+size = Vector3(6, 1, 6)
+
+[node name="TileBrickBLarge" type="StaticBody3D"]
+
+[node name="tileBrickB_largegltf" parent="." instance=ExtResource("1_r3spw")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_npmgw")

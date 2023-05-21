@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cil7u3iw48o0c"]
 
-[ext_resource type="Script" path="res://scenes/interact_area.gd" id="1_1tsco"]
+[ext_resource type="Script" path="res://scripts/interact_area.gd" id="1_so72r"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_53obc"]
 
@@ -8,7 +8,7 @@
 collision_layer = 2
 collision_mask = 0
 monitoring = false
-script = ExtResource("1_1tsco")
+script = ExtResource("1_so72r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_53obc")

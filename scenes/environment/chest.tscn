@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://crwrj1blybyp4"]
+
+[ext_resource type="PackedScene" uid="uid://cil7u3iw48o0c" path="res://scenes/interact_area.tscn" id="1_sb0xt"]
+[ext_resource type="Script" path="res://scripts/object_opener.gd" id="1_yc8ag"]
+[ext_resource type="PackedScene" uid="uid://bvn02phqd5oxo" path="res://assets/models/environment/chest/chest_common.gltf.glb" id="2_247yr"]
+[ext_resource type="PackedScene" uid="uid://kyuwec8ln57s" path="res://assets/models/environment/chest/chestTop_common.gltf.glb" id="3_5wbv6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5k1kg"]
+size = Vector3(1.5, 1, 1)
+
+[sub_resource type="Animation" id="Animation_12piv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChestHinge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ucefu"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChestHinge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2.35619, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5cs06"]
+_data = {
+"RESET": SubResource("Animation_12piv"),
+"open": SubResource("Animation_ucefu")
+}
+
+[node name="Chest" type="StaticBody3D"]
+script = ExtResource("1_yc8ag")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_5k1kg")
+
+[node name="ChestBase" type="Node3D" parent="."]
+
+[node name="chest_commongltf" parent="ChestBase" instance=ExtResource("2_247yr")]
+
+[node name="ChestHinge" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61203, -0.483602)
+
+[node name="chestTop_commongltf" parent="ChestHinge" instance=ExtResource("3_5wbv6")]
+
+[node name="InteractArea" parent="." instance=ExtResource("1_sb0xt")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+interact_label = "E"
+interact_type = "Chest"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5cs06")
+}

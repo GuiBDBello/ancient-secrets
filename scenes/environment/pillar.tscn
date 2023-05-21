@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://o137oqty2kn3"]
+
+[ext_resource type="PackedScene" uid="uid://b63mxdw7outjm" path="res://assets/models/environment/pillar.gltf.glb" id="1_6ych2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_taqm1"]
+size = Vector3(1.5, 4, 1.5)
+
+[node name="Pillar" type="StaticBody3D"]
+
+[node name="pillargltf" parent="." instance=ExtResource("1_6ych2")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_taqm1")

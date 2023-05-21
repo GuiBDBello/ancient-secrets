@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccbcur4ivoohp"]
+
+[ext_resource type="PackedScene" uid="uid://dawiorsqcwony" path="res://assets/models/environment/wall/wall_gateDoor.gltf.glb" id="1_7rqud"]
+[ext_resource type="PackedScene" uid="uid://chw6nedsbf4xr" path="res://assets/models/environment/wall/door_gate.gltf.glb" id="2_gr1bj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1hkrd"]
+size = Vector3(4, 4, 1.5)
+
+[node name="WallGateDoor" type="StaticBody3D"]
+
+[node name="wall_gateDoorgltf" parent="." instance=ExtResource("1_7rqud")]
+
+[node name="door_gategltf" parent="." instance=ExtResource("2_gr1bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_1hkrd")
