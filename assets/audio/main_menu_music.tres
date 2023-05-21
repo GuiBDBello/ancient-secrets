@@ -1,0 +1,4 @@
+[gd_resource type="AudioStreamWAV" format=3 uid="uid://f74d2bjbax56"]
+
+[resource]
+loop_mode = 1

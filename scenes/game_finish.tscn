@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci055i87qgrye"]
+
+[ext_resource type="Script" path="res://scripts/interact_area.gd" id="1_3sw6i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4dusv"]
+size = Vector3(20, 1, 20)
+
+[node name="GameFinish" type="Node3D"]
+
+[node name="InteractArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_3sw6i")
+interact_label = ""
+interact_type = "UWONLULZ"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea"]
+shape = SubResource("BoxShape3D_4dusv")

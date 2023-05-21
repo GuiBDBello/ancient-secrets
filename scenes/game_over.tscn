@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvfskqr6g5pka"]
+
+[ext_resource type="Script" path="res://scripts/interact_area.gd" id="1_82vef"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4dusv"]
+size = Vector3(150, 1, 150)
+
+[node name="GameOver" type="Node3D"]
+
+[node name="InteractArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_82vef")
+interact_label = ""
+interact_type = "GameOver"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea"]
+shape = SubResource("BoxShape3D_4dusv")

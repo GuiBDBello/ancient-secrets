@@ -1,5 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://cpkd6a1wqry30"]
+[gd_scene load_steps=28 format=3 uid="uid://cpkd6a1wqry30"]
 
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_aev5q"]
 [ext_resource type="PackedScene" uid="uid://dmhdhso84qc7e" path="res://scenes/player.tscn" id="3_23tj0"]
 [ext_resource type="PackedScene" uid="uid://de2iu33e3oij2" path="res://scenes/environment/floor/tile_brick_a_large.tscn" id="3_jv20l"]
 [ext_resource type="PackedScene" uid="uid://bkp7ga7q8sq7j" path="res://scenes/environment/floor/tile_brick_b_small.tscn" id="4_0vsk5"]
@@ -21,6 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://cuchicbxjhl0e" path="res://scenes/environment/pillar_broken_large.tscn" id="18_lvxrr"]
 [ext_resource type="PackedScene" uid="uid://dnftpnfhs1e5" path="res://scenes/environment/floor/tile_brick_a_medium.tscn" id="18_qabu2"]
 [ext_resource type="PackedScene" uid="uid://cwafvwvcqagqp" path="res://scenes/environment/trapdoor.tscn" id="21_i8ouv"]
+[ext_resource type="PackedScene" uid="uid://bvfskqr6g5pka" path="res://scenes/game_over.tscn" id="23_ei5rx"]
+[ext_resource type="PackedScene" uid="uid://ci055i87qgrye" path="res://scenes/game_finish.tscn" id="24_ny20f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0lmrh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -37,6 +40,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_aev5q")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ye545")
@@ -1007,6 +1011,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, -76)
 [node name="TileBrickASmall18" parent="Scenario/Room4/Floors" instance=ExtResource("12_yepgw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, -76)
 
+[node name="TileBrickASmall20" parent="Scenario/Room4/Floors" instance=ExtResource("12_yepgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -1, -88)
+
+[node name="TileBrickASmall21" parent="Scenario/Room4/Floors" instance=ExtResource("12_yepgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -1, -90)
+
+[node name="TileBrickASmall22" parent="Scenario/Room4/Floors" instance=ExtResource("12_yepgw")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27, -1, -90)
+
+[node name="TileBrickASmall23" parent="Scenario/Room4/Floors" instance=ExtResource("12_yepgw")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 25, -1, -90)
+
+[node name="TileBrickASmall24" parent="Scenario/Room4/Floors" instance=ExtResource("12_yepgw")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 25, -1, -88)
+
+[node name="TileBrickASmall25" parent="Scenario/Room4/Floors" instance=ExtResource("12_yepgw")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 25, -1, -86)
+
+[node name="TileBrickASmall26" parent="Scenario/Room4/Floors" instance=ExtResource("12_yepgw")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 27, -1, -86)
+
+[node name="TileBrickASmall27" parent="Scenario/Room4/Floors" instance=ExtResource("12_yepgw")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 29, -1, -86)
+
 [node name="TileBrickASmall10" parent="Scenario/Room4/Floors" instance=ExtResource("12_yepgw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, -74)
 
@@ -1120,9 +1148,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -1, -88)
 
 [node name="TileBrickALarge6" parent="Scenario/Room4/Floors" instance=ExtResource("3_jv20l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -1, -88)
-
-[node name="TileBrickALarge7" parent="Scenario/Room4/Floors" instance=ExtResource("3_jv20l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -1, -88)
 
 [node name="TileBrickALarge17" parent="Scenario/Room4/Floors" instance=ExtResource("3_jv20l")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 27, -1, -94)
@@ -1356,6 +1381,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -109)
 [node name="Trapdoor2" parent="Scenario/Room4" instance=ExtResource("21_i8ouv")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.25, -77)
 
+[node name="Trapdoor3" parent="Scenario/Room4" instance=ExtResource("21_i8ouv")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 28, -0.25, -88)
+
 [node name="Room5" type="Node3D" parent="Scenario"]
 
 [node name="Floors" type="Node3D" parent="Scenario/Room5"]
@@ -1365,9 +1393,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, -156)
 
 [node name="TileBrickBLarge27" parent="Scenario/Room5/Floors" instance=ExtResource("4_yp0mj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, -156)
-
-[node name="TileBrickBLarge28" parent="Scenario/Room5/Floors" instance=ExtResource("4_yp0mj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -1, -156)
 
 [node name="TileBrickBLarge29" parent="Scenario/Room5/Floors" instance=ExtResource("4_yp0mj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -1, -156)
@@ -1381,20 +1406,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -1, -168)
 [node name="TileBrickASmall18" parent="Scenario/Room5/Floors" instance=ExtResource("12_yepgw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, -152)
 
-[node name="TileBrickBLarge32" parent="Scenario/Room5/Floors" instance=ExtResource("4_yp0mj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -1, -168)
-
 [node name="TileBrickBLarge33" parent="Scenario/Room5/Floors" instance=ExtResource("4_yp0mj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, -162)
 
-[node name="TileBrickBLarge34" parent="Scenario/Room5/Floors" instance=ExtResource("4_yp0mj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, -162)
-
 [node name="TileBrickBLarge35" parent="Scenario/Room5/Floors" instance=ExtResource("4_yp0mj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -1, -156)
-
-[node name="TileBrickBLarge36" parent="Scenario/Room5/Floors" instance=ExtResource("4_yp0mj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1, -156)
 
 [node name="TileBrickBLarge37" parent="Scenario/Room5/Floors" instance=ExtResource("4_yp0mj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1, -162)
@@ -1464,6 +1480,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, -148)
 
 [node name="TileBrickASmall14" parent="Scenario/Room5/Floors" instance=ExtResource("12_yepgw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, -150)
+
+[node name="TileBrickBLargeCrackedB3" parent="Scenario/Room5/Floors" instance=ExtResource("16_lr0ow")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3, -1, -162)
+
+[node name="TileBrickBLargeCrackedB6" parent="Scenario/Room5/Floors" instance=ExtResource("16_lr0ow")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -15, -1, -156)
+
+[node name="TileBrickBLargeCrackedB4" parent="Scenario/Room5/Floors" instance=ExtResource("16_lr0ow")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 9, -1, -156)
+
+[node name="TileBrickBLargeCrackedB5" parent="Scenario/Room5/Floors" instance=ExtResource("16_lr0ow")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 9, -1, -168)
 
 [node name="Walls" type="Node3D" parent="Scenario/Room5"]
 
@@ -1590,6 +1618,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 3, -176.3)
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 17.25, 2, -165.2)
 
 [node name="Player" parent="." instance=ExtResource("3_23tj0")]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -32, 0.5, -88)
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0.5, 0)
 
 [node name="CameraRig" parent="." instance=ExtResource("4_cjevv")]
+
+[node name="GameOver" parent="." instance=ExtResource("23_ei5rx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, -75)
+
+[node name="GameFinish" parent="." instance=ExtResource("24_ny20f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -182)

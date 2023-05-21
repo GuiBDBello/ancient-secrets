@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://54u7wy30eejr"]
+
+[ext_resource type="FontFile" uid="uid://bjbgedrwtpsms" path="res://assets/fonts/Prompt/Prompt-Black.ttf" id="1_dkkki"]
+
+[resource]
+default_font = ExtResource("1_dkkki")
+default_font_size = 48

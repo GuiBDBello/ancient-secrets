@@ -14,6 +14,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * 5
 @onready var all_interactions = []
 @onready var interact_label = $InteractionComponents/InteractLabel
 
+@onready var info_menu = $GUI/InfoMenu
+
 var walking = false
 var keys = 0
 
@@ -23,14 +25,19 @@ func _ready():
 	animation_player.set_blend_time("run", "idle", 0.2)
 	update_interactions()
 
+func _process(delta):
+	if Input.is_action_just_pressed("pause"):
+		get_tree().paused = true
+		$GUI/PauseMenu.visible = true
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+#	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+#		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -64,6 +71,18 @@ func _on_interaction_area_area_entered(area):
 	match area.interact_type:
 		"Trapdoor":
 			area.get_parent().open()
+		"GameOver":
+			get_node("GUI/InfoMenu/Background/CenterContainer/VBoxContainer/Label").text = "You are dead!"
+			get_node("GUI/InfoMenu/Background/CenterContainer/VBoxContainer/Button").text = "Restart"
+			info_menu.visible = true
+			get_tree().paused = true
+			return
+		"UWONLULZ":
+			get_node("GUI/InfoMenu/Background/CenterContainer/VBoxContainer/Label").text = "Congratulations! You found the Forgotten Knowledge! (I didn't have time to implement anything <3)"
+			get_node("GUI/InfoMenu/Background/CenterContainer/VBoxContainer/Button").text = "Restart"
+			info_menu.visible = true
+			get_tree().paused = true
+			return
 	if !area.get_parent().isOpen:
 		all_interactions.insert(0, area)
 		update_interactions()
@@ -81,7 +100,6 @@ func update_interactions():
 		interact_label.text = ""
 
 func interact():
-	print("e")
 	if all_interactions:
 		var current_interaction = all_interactions[0]
 		print("Interaction with " + current_interaction.interact_type)
@@ -89,7 +107,9 @@ func interact():
 			"Chest":
 				if current_interaction.get_parent().open():
 					keys = keys + 1
-					interact_label.text = "You found a key!"
+					interact_label.text = ""
+					get_tree().paused = true
+					$GUI/InfoMenu.visible = true
 			"Door":
 				if keys > 0:
 					if current_interaction.get_parent().open():
