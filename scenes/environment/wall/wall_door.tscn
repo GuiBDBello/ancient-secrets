@@ -144,7 +144,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0)
 shape = SubResource("BoxShape3D_qsjyp")
 
 [node name="InteractArea" parent="." instance=ExtResource("2_ichol")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 interact_label = "E"
 interact_type = "Door"
 

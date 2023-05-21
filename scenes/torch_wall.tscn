@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1gkc2uggpd7b"]
+
+[ext_resource type="PackedScene" uid="uid://b0w8stwsihbsu" path="res://assets/models/environment/torchWall.gltf.glb" id="1_qfmcw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_onuk8"]
+size = Vector3(0.5, 1, 1)
+
+[node name="TorchWall" type="StaticBody3D"]
+
+[node name="torchWallgltf" parent="." instance=ExtResource("1_qfmcw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193915, 0, -0.0551422)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0.275)
+shape = SubResource("BoxShape3D_onuk8")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.187142, 0.754598, 0.570505)
+light_color = Color(1, 0.490196, 0, 1)
+light_energy = 2.0
+light_indirect_energy = 3.0
+omni_range = 15.0

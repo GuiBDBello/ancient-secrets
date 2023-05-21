@@ -1,11 +1,11 @@
 extends CharacterBody3D
 
 
-const SPEED = 18.0
-const JUMP_VELOCITY = 4.5
+const SPEED = 10
+const JUMP_VELOCITY = 10
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * 5
 
 @onready var animation_player = $Model/PlayerNode/AnimationPlayer
 @onready var model = $Model
@@ -61,8 +61,12 @@ func _physics_process(delta):
 
 # Interaction methods
 func _on_interaction_area_area_entered(area):
-	all_interactions.insert(0, area)
-	update_interactions()
+	match area.interact_type:
+		"Trapdoor":
+			area.get_parent().open()
+	if !area.get_parent().isOpen:
+		all_interactions.insert(0, area)
+		update_interactions()
 
 
 func _on_interaction_area_area_exited(area):
@@ -85,6 +89,13 @@ func interact():
 			"Chest":
 				if current_interaction.get_parent().open():
 					keys = keys + 1
+					interact_label.text = "You found a key!"
 			"Door":
-				if keys > 0 and current_interaction.get_parent().open():
-					keys = keys - 1
+				if keys > 0:
+					if current_interaction.get_parent().open():
+						keys = keys - 1
+						all_interactions.erase(current_interaction)
+						update_interactions()
+					interact_label.text = ""
+				else:
+					interact_label.text = "You need a key!"
