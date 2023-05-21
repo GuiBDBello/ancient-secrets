@@ -4,10 +4,9 @@
 
 ### Assets
 
-For prototyping I used some assets referenced below:
-
 - Character and animations: https://www.mixamo.com/#/
 - Textures: https://kenney.nl/assets/prototype-textures
+- Dungeon Asset Pack: https://kaylousberg.itch.io/kaykit-dungeon
 
 ### Tutorials
 
