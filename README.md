@@ -61,8 +61,7 @@ To get a local copy up and running follow the steps below.
 ### Configuration
 
 1. Clone repository: `git clone https://github.com/GuiBDBello/ancient-secrets.git`.
-1. Import the project in Godot: `Import > Select the project folder`.
-1. Double-click the project to open.
+1. Import the project in Godot: `Import > Select the project folder > Import & Edit`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
