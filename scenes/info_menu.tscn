@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsu4cvuiklxxr"]
+[gd_scene load_steps=4 format=3 uid="uid://dsu4cvuiklxxr"]
 
 [ext_resource type="Script" path="res://scripts/info_menu.gd" id="1_045vo"]
 [ext_resource type="Theme" uid="uid://54u7wy30eejr" path="res://themes/menu.tres" id="1_gm8et"]
+
+[sub_resource type="Theme" id="Theme_0keqn"]
 
 [node name="InfoMenu" type="Control"]
 process_mode = 3
@@ -36,13 +38,18 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Background/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(900, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_gm8et")
 text = "You found a key!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Button" type="Button" parent="Background/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_0keqn")
 text = "Pick up"
 
 [connection signal="pressed" from="Background/CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

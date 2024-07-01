@@ -78,7 +78,7 @@ func _on_interaction_area_area_entered(area):
 			get_tree().paused = true
 			return
 		"UWONLULZ":
-			get_node("GUI/InfoMenu/Background/CenterContainer/VBoxContainer/Label").text = "Congratulations! You found the Forgotten Knowledge! (I didn't have time to implement anything <3)"
+			get_node("GUI/InfoMenu/Background/CenterContainer/VBoxContainer/Label").text = "Congratulations! You found the Forgotten Knowledge! (I didn't have time to implement anything special, but thanks for playing! <3)"
 			get_node("GUI/InfoMenu/Background/CenterContainer/VBoxContainer/Button").text = "Restart"
 			info_menu.visible = true
 			get_tree().paused = true
